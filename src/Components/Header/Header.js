@@ -37,8 +37,7 @@ export default class Header extends Component {
       password
     }).then(res => {
       this.props.updateUser(res.data)
-      this.state.username = ''
-      this.state.password = ''
+      this.setState({username: '', password: ''})
     }).catch(err => {
       swal.fire(err.response.request.response)
     })
@@ -67,7 +66,10 @@ export default class Header extends Component {
   }
 
   logout() {
-    // axios GET to /auth/logout here
+    axios.delete('/auth/logout').then(res => {
+      swal.fire(res.data)
+      this.props.updateUser({})
+    })
   }
 
   render() {
