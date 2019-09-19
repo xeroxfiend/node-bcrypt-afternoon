@@ -5,6 +5,8 @@ const app = express();
 const massive = require("massive");
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
 
+const authCtrl = require('./controllers.js/authController')
+
 app.use(express.json());
 
 app.use(
@@ -14,6 +16,10 @@ app.use(
     secret: SESSION_SECRET
   })
 );
+
+//endpoints
+
+app.post('/auth/register', authCtrl.register)
 
 
 
