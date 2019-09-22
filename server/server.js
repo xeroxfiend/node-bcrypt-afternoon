@@ -15,7 +15,7 @@ app.use(
   session({
     resave: false,
     saveUninitialized: false,
-    secret: SESSION_SECRET
+    secret: SESSION_SECRET,
   })
 );
 
@@ -24,7 +24,7 @@ app.get('/api/treasure/dragon', treasureCtrl.dragonTreasure)
 
 app.get('/api/treasure/user', auth.usersOnly, treasureCtrl.getUserTreasure)
 
-app.get('/api/treasure/all', treasureCtrl.getAllTreasure)
+app.get('/api/treasure/all', auth.usersOnly, auth.adminsOnly, treasureCtrl.getAllTreasure)
 
 app.post('/api/treasure/user', auth.usersOnly, treasureCtrl.addUserTreasure)
 
